@@ -1,0 +1,1 @@
+Sebuah Project untuk membuat program POS ( point on sale ) untuk melaksanakan ujian praktek :D
