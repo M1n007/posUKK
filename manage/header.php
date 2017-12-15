@@ -1,5 +1,4 @@
 <?php
-include 'configuration/konek.php';
 session_start();
 ?>
 <!DOCTYPE html>
