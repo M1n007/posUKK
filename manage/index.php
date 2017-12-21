@@ -1,4 +1,8 @@
 <?php
+#Special thanks for SMK Muhammadiyah Majenang
+#ProjectUKK by Aminudin
+#Contact amin4udin@gmail(dot)com
+
 require_once 'header.php';
 session_start();
 if (empty($_SESSION['username'])) {
