@@ -1,10 +1,27 @@
-<?php require_once 'header.php'; ?>
+<?php
+require_once 'header.php';
+session_start();
+if (empty($_SESSION['username'])) {
+	header("Location: ../about.php");
+}
+?>
 
-	<div class="">
-		<div class="col-md-12" style="background-color:#3498db;">
-			<center>
-				<marquee><font color="white" size="5px">Program Simple APP_Kasir</font></marquee>
-			</center>
+
+	<br>
+	<div class="container-fluid">
+		<div class="col-md-5">
+			<a href="user.php"><button class="btn btn-default">Manage User</button></a>
+			<font color="red" size="1">*untuk menambah / mengedit data user</font><br><hr>
+			<a href="barang.php"><button class="btn btn-default">Manage Barang</button></a>
+			<font color="red" size="1">*untuk menambah / mengedit data barang</font><br><hr>
+			<a href="#"><button class="btn btn-default">Riwayat Transaksi</button></a>
+			<font color="red" size="1">*untuk melihat riwayat transaksi</font>
+			<br>
+			<br>
+			 Anda login sebagai <b><?php echo $_SESSION['username']; ?></b> ? <a href="logout.php">LogOut</a>
+		</div>
+		<div class="col-md-7">
+
 		</div>
 	</div>
 

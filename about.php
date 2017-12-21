@@ -1,5 +1,7 @@
 
-<?php require_once 'layout/header.php' ?>
+<?php
+require_once 'layout/header.php';
+?>
 
 <div class="container">
 
@@ -9,27 +11,22 @@
 						<font><b>Form Login :)</b></font>
 					</div>
 					<div class="modal-body">
-						<?php 
+						<?php
 						if (isset($_POST['log'])) {
-							$user = $_POST['userlog'];
-							$pass = $_POST['passlog'];
-							$query = $konek->query("SELECT * FROM user");
-							$h = $query->fetch_array(MYSQLI_BOTH);
-							$username = $h['username'];
-							$password = $h['password'];
-							$level = $h['level'];
-							if ($username == $user && $password == $pass ) {
-								$_SESSION['level'] == $level;
+							$username = $_POST['userlog'];
+							$password = $_POST['passlog'];
+							$query = mysqli_query($konek, "select * from user where username='$username' and password='$password'");
+							$ya = mysqli_num_rows($query);
+							if ($ya==TRUE) {
+								$_SESSION['username'] = $username;
 								header("Location: manage/index.php");
 							}else{
-								?><font class="alert alert-danger">Login Gagal username/password salah!!!</font>
+								?><font color="red" class="alert alert-danger">Anda gagal login, kemungkinan username/password salah!!</font>
 								<?php
 							}
-
 						}
 
 						?>
-						<hr>
 						<form action="" method="post">
 							<label>Username :</label>
 							<input class="form-control" type="text" name="userlog" placeholder="masukan username...">
@@ -43,7 +40,7 @@
 				</div>
 			</div>
 
-			
+
 </div>
 
-<?php require_once 'layout/footer.php' ?>
+<?php require_once 'layout/footer.php'; ?>
