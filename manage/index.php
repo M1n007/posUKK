@@ -1,21 +1,11 @@
-<?php 
-require_once 'header.php';
-?>
+<?php require_once 'header.php'; ?>
 
-	<nav>
-		<ul>
-			<li>APP_KASIR</li>
-			<?php 
-			$level = $_SESSION['level'] == 'kasir';
-			if ($level) {
-			?>
-			<li>Manage User</li>
-			<li>Manage Barang</li>
-			<?php }else{ ?>
-			<li>Transaksi</li>
-			<?php } ?>
-			<li>LogOut</li>
-		</ul>
-	</nav>
+	<div class="">
+		<div class="col-md-12" style="background-color:#3498db;">
+			<center>
+				<marquee><font color="white" size="5px">Program Simple APP_Kasir</font></marquee>
+			</center>
+		</div>
+	</div>
 
 <?php require_once 'footer.php'; ?>
