@@ -7,7 +7,8 @@ include '../configuration/konek.php';
 <br>
   <div class="row">
     <div class="col-md-4">
-      <a href="index.php"><button class="btn btn-primary">Kembali</button></a>
+      <a href="index.php"><button class="btn btn-primary">Kembali ke home page</button></a><br><br>
+      <a href="user.php"><button class="btn btn-primary">Refresh this page</button></a>
     </div>
     <div class="col-md-4">
         <?php
@@ -15,7 +16,8 @@ include '../configuration/konek.php';
         if (isset($_POST['tambah'])) {
           $user = $_POST['useradd'];
           $pass = $_POST['passadd'];
-          $query = mysqli_query($konek, "insert into user(username, password)values('$user', '$pass')");
+          $level = $_POST['leveladd'];
+          $query = mysqli_query($konek, "insert into user(username, password, level)values('$user', '$pass', '$level')");
           if ($query) {
             ?><font class="alert alert-success card card-title"><b>Tambah Data Berhasil!!<b></font>
             <?php
@@ -33,6 +35,7 @@ include '../configuration/konek.php';
         if (isset($_POST['update'])) {
           $user1 = $_POST['useradd'];
           $pass1 = $_POST['passadd'];
+          $level1 = $_POST['leveladd'];
           $update = "update user set username='$user1', password='$pass1' where id=".$_GET['edit'];
           $update1 = $konek->query($update);
           if ($update1) {
@@ -48,6 +51,11 @@ include '../configuration/konek.php';
           <input type="text" name="useradd" value="<?php if(isset($_GET['edit'])){ echo $tam['1']; } ?>" class="form-control" placeholder="masukan username"><br>
           <label>password :</label>
           <input type="text" name="passadd" value="<?php if(isset($_GET['edit'])){ echo $tam['2']; } ?>" class="form-control" placeholder="masukan password"><br>
+          <label>Pilih hak akses :</label>
+          <select name="leveladd" class="form-control">
+            <option value="admin">admin</option>
+            <option value="kasir">kasir</option>
+          </select><br>
           <?php
             if (isset($_GET['edit'])) {
               ?><button name="update" class="btn btn-primary">Update Data</button>
@@ -89,6 +97,7 @@ include '../configuration/konek.php';
             <th>id</th>
             <th>Username</th>
             <th>Password</th>
+            <th>Role/level</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -101,9 +110,10 @@ include '../configuration/konek.php';
             <td><?php echo $r['0']; ?></td>
             <td><?php echo $r['1']; ?></td>
             <td><?php echo $r['2']; ?></td>
+            <td><?php echo $r['3']; ?></td>
             <td>
-              <a href="?edit=<?php echo $r['0'] ?>"><button class="btn btn-success">Edit</button></a>
-              <a href="?hapus=<?php echo $r['0'] ?>"<button class="btn btn-success">Hapus</button></a>
+              <a href="?edit=<?php echo $r['0'] ?>" class="btn btn-success">Edit</a>
+              <a href="?hapus=<?php echo $r['0'] ?>" class="btn btn-success">Hapus</a>
             </td>
           </tr>
         </tbody>
