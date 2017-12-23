@@ -13,7 +13,6 @@ if (empty($_SESSION['username'])) {
 
 	<br>
 	<div class="container-fluid">
-
 		<div class="col-md-12">
 			<a href="user.php"><button class="btn btn-default">Manage User</button></a>
 			<font color="red" size="1">*untuk menambah / mengedit data user</font><br><hr>

@@ -45,6 +45,7 @@ include '../configuration/konek.php';
             ?><font class="alert alert-danger card card-title"><b>Update Data Gagal!!<b></font>
             <?php
         }
+      }
         ?>
         <center><font class="alert alert-warning card card-title"><b>Silahkan Tambah/merubah data user<b></font></center>
         <form action="" method="post">
@@ -54,7 +55,7 @@ include '../configuration/konek.php';
           <input type="text" name="passadd" value="<?php if(isset($_GET['edit'])){ echo $tam['2']; } ?>" class="form-control" placeholder="masukan password"><br>
           <label>Pilih hak akses :</label>
           <select name="leveladd" class="form-control">
-            <option value="admin">admin</option>
+            <option value="admin"><?php if(isset($_GET['edit'])){ echo $tam['3']; } ?></option>
             <option value="kasir">kasir</option>
           </select><br>
           <?php
@@ -104,7 +105,8 @@ include '../configuration/konek.php';
         </thead>
         <?php
         $query = mysqli_query($konek, "select * from user");{
-        while ($r = mysqli_fetch_array($query)) {
+        while ($r = mysqli_fetch_array($query)){
+
          ?>
         <tbody>
           <tr>
