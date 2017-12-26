@@ -18,14 +18,16 @@ require_once 'layout/header.php';
 						if (isset($_POST['log'])) {
 							$username = $_POST['userlog'];
 							$password = $_POST['passlog'];
-							$query = mysqli_query($konek, "select * from user where username='$username' and password='$password'");
+							$level = $_POST['levellog'];
+							$query = mysqli_query($konek, "select * from user where username='$username' and password='$password' and level='$level'");
 							$ya = mysqli_num_rows($query);
 							if ($ya==TRUE) {
 								$_SESSION['username'] = $username;
+								$_SESSION['level'] = $level;
 								header("Location: manage/index.php");
 							}else{
-								?><font color="red" class="alert alert-danger">Anda gagal login, kemungkinan username/password salah!!</font>
-								<?php
+								?><font class="alert alert-danger card card-title"><b>Login Gagal!!, pastikan data sesuai.<b></font>
+		            <?php
 							}
 						}
 
@@ -35,6 +37,11 @@ require_once 'layout/header.php';
 							<input class="form-control" type="text" name="userlog" placeholder="masukan username...">
 							<label>Password :</label>
 							<input class="form-control" type="text" name="passlog" placeholder="masukan password...">
+							<label>level :</label>
+							<select name="levellog" class="form-control">
+								<option value="admin">admin</option>
+								<option value="kasir">kasir</option>
+							</select>
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-primary" name="log">Login</button>

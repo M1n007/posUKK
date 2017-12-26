@@ -5,6 +5,7 @@
 require_once 'header.php';
 include '../configuration/konek.php';
 error_reporting(0);
+session_start();
 ?>
 
 
@@ -19,7 +20,7 @@ error_reporting(0);
   <br>
   <div class="card card-default">
     <div class="card-heading">
-      <center><font class="alert alert-primary card card-title" size="6"><b>Menu Transaksi</b></font></center>
+      <center><font class="alert alert-primary card card-title" size="6"><b>Menu Transaksi <br>Hy <font class="alert alert-success"><?php echo $_SESSION['username']; ?></font></b></font></center>
     </div>
     <div class="card-body">
       <div class="row justify-content-start">
@@ -56,11 +57,11 @@ error_reporting(0);
                 }else{
                   ?><form action="" method="post">
                     <label>Nama Item :</label>
-                    <input type="text" name="namabrg" value="<?php echo $tam['1'] ?>" class="form-control" readonly>
+                    <input type="text" name="namabrg" value="<?php echo "Belum ada data silahkan cari melalui id diatas" ?>" class="form-control" readonly>
                     <label>Harga Item(Rp) :</label>
-                    <input type="text" id="harga" name="hargabrg" value="<?php echo $tam['2'] ?>" class="form-control" readonly>
+                    <input type="text" onkeyup="hitung();" name="hargabrg" value="<?php echo "Belum ada data" ?>" class="form-control" readonly>
                     <label>Stok Item :</label>
-                    <input type="number" name="stokbrg" value="<?php echo $tam['3'] ?>" class="form-control" readonly>
+                    <input type="number" name="stokbrg" value="<?php echo "0" ?>" class="form-control" readonly>
                   </form>
                   <?php
               }
@@ -75,14 +76,14 @@ error_reporting(0);
             <div class="card card-body">
               <form action="" method="post">
                 <label>Jumlah Item :</label>
-                <input type="number" id="jumlahitem" name="jumlahbrg" class="form-control">
+                <input type="number" onkeyup="hitung()" name="jumlahbrg" class="form-control">
                 <label>Total Harga :</label>
-                <input type="text" id="totalharga" name="totalbrg" class="form-control" readonly>
+                <input type="text" name="totalbrg" class="form-control" readonly>
                 <label>Jumlah Uang Yang Dibayarkan :</label>
                 <input type="number" name="duitbrg" class="form-control">
                 <label>Kembalian :</label>
                 <input type="number" name="kembalibrg" class="form-control"><br>
-                <input type="submit" name="langsung" value="Bayar" class="btn btn-success">
+                <input type="submit" name="langsung" value="cetak" class="btn btn-success">
               </form>
             </div>
           </div>
@@ -93,6 +94,4 @@ error_reporting(0);
   </div>
   <br>
 </div>
-
-
 <?php require_once 'footer.php'; ?>
