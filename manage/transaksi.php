@@ -44,11 +44,13 @@ session_start();
               ?>
               <br>
 
-              <form action="" method="post">
+              <form action="" method="post" name="harga">
                 <label>Nama Item :</label>
                 <input type="text" name="namabrg" value="<?php echo $tam['1'] ?>" class="form-control" readonly>
                 <label>Harga Item(Rp) :</label>
-                <input type="text" id="harga" name="hargabrg" value="<?php echo 'Rp' . $tam['2'] ?>" class="form-control" readonly>
+                <div class="input-group">
+                  <span class="input-group-addon"><strong>Rp</strong></span><input type="text" id="hargabrg" name="hargabrg" value="<?php echo $tam['2'] ?>" class="form-control" readonly>
+                </div>
                 <label>Stok Item :</label>
                 <input type="number" name="stokbrg" value="<?php echo $tam['3'] ?>" class="form-control" readonly>
               </form>
@@ -57,11 +59,13 @@ session_start();
                 }else{
                   ?><form action="" method="post">
                     <label>Nama Item :</label>
-                    <input type="text" name="namabrg" value="<?php echo "Belum ada data silahkan cari melalui id diatas" ?>" class="form-control" readonly>
+                    <input type="text" value="<?php echo "Belum ada data silahkan cari melalui id diatas" ?>" class="form-control" readonly>
                     <label>Harga Item(Rp) :</label>
-                    <input type="text" onkeyup="hitung();" name="hargabrg" value="<?php echo "Belum ada data" ?>" class="form-control" readonly>
+                    <div class="input-group">
+                      <span class="input-group-addon"><strong>Rp</strong></span><input type="text" value="0" class="form-control" readonly>
+                    </div>
                     <label>Stok Item :</label>
-                    <input type="number" name="stokbrg" value="<?php echo "0" ?>" class="form-control" readonly>
+                    <input type="number" value="<?php echo "0" ?>" class="form-control" readonly>
                   </form>
                   <?php
               }
@@ -74,15 +78,22 @@ session_start();
         <div class="col-5">
           <div class="card card-primary">
             <div class="card card-body">
-              <form action="" method="post">
+              <form action="" method="post" name="total">
                 <label>Jumlah Item :</label>
-                <input type="number" onkeyup="hitung()" name="jumlahbrg" class="form-control">
+                <input type="number" id="jumlahbrg" name="jumlahbrg" class="form-control">
                 <label>Total Harga :</label>
-                <input type="text" name="totalbrg" class="form-control" readonly>
+                <div class="input-group">
+                  <span class="input-group-addon"><strong>Rp</strong></span><input type="text" id="totalbrg" value="<?php echo $quer; ?>" name="totalbrg" class="form-control" readonly>
+                </div>
                 <label>Jumlah Uang Yang Dibayarkan :</label>
-                <input type="number" name="duitbrg" class="form-control">
+                <div class="input-group">
+                  <span class="input-group-addon"><strong>Rp</strong></span><input type="text" name="duitbrg" class="form-control">
+                </div>
                 <label>Kembalian :</label>
-                <input type="number" name="kembalibrg" class="form-control"><br>
+                <div class="input-group">
+                  <span class="input-group-addon"><strong>Rp</strong></span><input type="text" name="kembalibrg" class="form-control"><br>
+                </div>
+                <br>
                 <input type="submit" name="langsung" value="cetak" class="btn btn-success">
               </form>
             </div>
