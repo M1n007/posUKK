@@ -17,6 +17,7 @@ session_start();
     <a href="index.php"><button class="btn btn-primary">Kembali ke home page</button></a> |
     <a href="transaksi.php"><button class="btn btn-primary">Refresh this page</button></a>
   </div>
+  <br>
   <?php
     if (isset($_POST['add'])) {
       $nama_item = $_POST['namabrg'];
@@ -27,9 +28,11 @@ session_start();
       $keranjang = mysqli_query($konek, "insert into harga(nama_item,harga_satuan,jumlah_item,total_harga_item)values('$nama_item','$harga_satuan','$jumlah_item','$total_harga_item')");
 
       if ($keranjang) {
-        echo "sukses update data";
+        ?><font class="alert alert-success card card-title"><b>Sukses Menambahkan keranjang!!</b></font>
+        <?php
       }else{
-        echo "gagal update data";
+        ?><font class="alert alert-danger card card-title"><b>Gagal menambahkan keranjang</b></font>
+        <?php
       }
     }
    ?>
@@ -40,7 +43,7 @@ session_start();
     </div>
     <div class="card-body">
       <div class="row justify-content-start">
-        <div class="col-7">
+        <div class="col-5">
           <div class="card card-primary">
             <div class="card card-body">
               <form action="" method="get">
@@ -69,69 +72,6 @@ session_start();
                 </div>
                 <label>Stok Item :</label>
                 <input type="number" name="stokbrg" value="<?php echo $tam['3'] ?>" class="form-control" readonly>
-              </form>
-              <?php
-                }
-                }else{
-                  ?><form action="" method="post">
-                    <label>Nama Item :</label>
-                    <input type="text" value="<?php echo "Belum ada data silahkan cari melalui id diatas" ?>" class="form-control" readonly>
-                    <label>Harga Item(Rp) :</label>
-                    <div class="input-group">
-                      <span class="input-group-addon"><strong>Rp</strong></span><input type="text" value="0" class="form-control" readonly>
-                    </div>
-                    <label>Stok Item :</label>
-                    <input type="number" value="<?php echo "0" ?>" class="form-control" readonly>
-                  </form>
-                  <?php
-              }
-
-              ?>
-                <hr>
-                <table class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Nama Item</th>
-                      <th>Harga Satuan</th>
-                      <th>Jumlah Item</th>
-                      <th>Total Harga</th>
-                    </tr>
-                  </thead>
-                  <?php
-                  $keranjangtam = mysqli_query($konek, "select * from harga");{
-                    while ($keranjangtam1 = mysqli_fetch_array($keranjangtam)) {
-                   ?>
-                  <tbody>
-                    <tr>
-                      <td><?php echo $keranjangtam1['0']; ?></td>
-                      <td><?php echo $keranjangtam1['1']; ?></td>
-                      <td><?php echo $keranjangtam1['2']; ?></td>
-                      <td><?php echo $keranjangtam1['3']; ?></td>
-                      <td><?php echo $keranjangtam1['4']; ?></td>
-                      <td><a href="#">Remove</a></td>
-                    </tr>
-                  </tbody>
-                  <?php
-                    }
-                  }
-                   ?>
-                   <thead>
-                     <tr>
-                       <th colspan="4">Total Semua Harga</th>
-                       <td colspan="2">Total Semua</td>
-                     </tr>
-                   </thead>
-                </table>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="col-5">
-          <div class="card card-primary">
-            <div class="card card-body">
-              <form action="" method="post" name="total">
                 <label>Jumlah Item :</label>
                 <input type="number" id="jumlahbrg" onfocus="startHitung()" onblur="rampungHitung()" name="jumlahbrg" class="form-control">
                 <label>Total Harga :</label>
@@ -150,9 +90,82 @@ session_start();
                 <input type="submit" name="langsung" value="cetak" class="btn btn-success">
                 <input type="submit" name="add" value="masukan keranjang" class="btn btn-primary">
               </form>
+              <?php
+                }
+                }else{
+                  ?><form action="" method="post">
+                    <label>Nama Item :</label>
+                    <input type="text" value="<?php echo "Belum ada data silahkan cari melalui id diatas" ?>" class="form-control" readonly>
+                    <label>Harga Item(Rp) :</label>
+                    <div class="input-group">
+                      <span class="input-group-addon"><strong>Rp</strong></span><input type="text" value="0" class="form-control" readonly>
+                    </div>
+                    <label>Stok Item :</label>
+                    <input type="number" value="<?php echo "0" ?>" class="form-control" readonly>
+                  </form>
+                  <?php
+              }
+
+              ?>
             </div>
           </div>
         </div>
+
+
+        <div class="col-7">
+          <?php
+          if (isset($_GET['hapus'])) {
+            $hapus = "delete from harga where id=".$_GET['hapus'];
+            $hapus1 = $konek->query($hapus);
+            if ($hapus1) {
+              ?><font class="alert alert-success card card-title"><b>Hapus Data Berhasil!!<b></font>
+              <?php
+            }else{
+              ?><font class="alert alert-danger card card-title"><b>Hapus Data Gagal!!<b></font>
+              <?php
+            }
+          }
+           ?>
+              <form action="" method="get">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th colspan="2">Nama Item</th>
+                      <th>Harga Satuan</th>
+                      <th>Jumlah Item</th>
+                      <th>Total Harga</th>
+                    </tr>
+                  </thead>
+                  <?php
+                  $keranjangtam = mysqli_query($konek, "select * from harga");{
+                    while ($keranjangtam1 = mysqli_fetch_array($keranjangtam)) {
+                      @$no++;
+                   ?>
+                  <tbody>
+                    <tr>
+                      <td colspan="2"><?php echo $keranjangtam1['1']; ?></td>
+                      <td><span class="input-group-addon"><strong>Rp<?php echo $keranjangtam1['2']; ?></strong></span></td>
+                      <td><?php echo $keranjangtam1['3']; ?></td>
+                      <td><span class="input-group-addon"><strong>Rp<font name="totalhrgkeranjang" title="jumlah harga Rp<?php echo $keranjangtam1['4']; ?>"><?php echo $keranjangtam1['4']; ?></font></strong></span></td>
+                      <td colspan="3"><a href="?hapus=<?php echo $keranjangtam1['0']; ?>" class="">Remove</a></td>
+                    </tr>
+                  </tbody>
+                  <?php
+                    }
+                  }
+                   ?>
+                   <thead>
+                     <tr>
+                       <?php
+                        //tahap nyesek
+                        ?>
+                       <th colspan="4">Total Semua Harga</th>
+                       <td colspan="2"><span class="input-group-addon"><b>Rp</b><strong><font name="totalsemua" onfocus="readyHitung()" onblur="endHitung()" class="form-control" type="text"></font></strong></span></td>
+                     </tr>
+                   </thead>
+                </table>
+              </form>
+            </div>
 
         </div>
       </div>
